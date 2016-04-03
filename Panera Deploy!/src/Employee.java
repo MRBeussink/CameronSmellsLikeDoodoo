@@ -6,19 +6,23 @@
 public class Employee {
 	
 	private String name;
-	private Time startTime;
-	private Time endTime;
-	
-	//skills
-	private boolean manager, prep, coordinator, dining, cashier, salad, sandwhich, consolidator,
-		expiditer;
-	
 
-	public Employee(String name, Time start, Time end){
-		this.name = name;
-		this.startTime = start;
-		this.endTime = end;
+	public enum Skill {
+		manager, prep, cordinator, dining, dishes, cashier, salad,
+		sandwhich, consolidator, expiditer
 	}
+
+	private Skill[] skillSet;
+
+	public Employee(String name, int numOfSkills, LinkedList.Node firstSkill){
+		this.name = name;
+		skillSet = new Skill[numOfSkills];
+
+		for (int i = 0; i < numOfSkills; i++){
+
+		}
+	}
+
 	
 
 }
