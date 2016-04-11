@@ -8,24 +8,31 @@
 public class Time implements Comparable<Time>{
 	private int time;		//stores hours and minutes in 24hr time
 
+    /*
 	//This represents whether the time is AM, PM, or in 24hr/military time
 	public enum Meridian{
 		AM, PM, X
 	}
+    */
 
-	//Todo: I'm not really sure this is necessary
-	private Meridian meridian;
-
-
-	public Time(int time, Meridian meridian){
+	public Time(int time){
 		this.time = time;
-		this.meridian = meridian;
 	}
 
 	//todo: C, could you make this so that the raw input from the spreadsheet is converted into time
 	public Time(String rawTime){
 
 	}
+
+    public void setTime(int time){
+        this.time = time;
+    }
+
+    public int getTime(){
+        return this.time;
+    }
+
+
 
 	public int compareTo(Time aTime){
 		if (this.time == aTime.time)

@@ -4,19 +4,15 @@
 
 
 public class Employee {
-	
+	/*
 	private String name;
 
-	public enum Skill {
-		manager, prep, cordinator, dining, dishes, cashier, salad,
-		sandwhich, consolidator, expiditer
-	}
 
-	private Skill[] skillSet;
+	private AbstractEmployeeSkillset skillSet;
 
-	public Employee(String name, int numOfSkills, LinkedList.Node firstSkill){
+	public Employee(String name, int numOfSkills  ){
 		this.name = name;
-		skillSet = new Skill[numOfSkills];
+		..skillSet =
 
 		for (int i = 0; i < numOfSkills; i++){
 
@@ -24,5 +20,5 @@ public class Employee {
 	}
 
 	
-
+*/
 }
