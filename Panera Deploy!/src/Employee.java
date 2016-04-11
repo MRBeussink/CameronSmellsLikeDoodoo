@@ -4,21 +4,47 @@
 
 
 public class Employee {
-	/*
-	private String name;
+
+    protected String name;
+    protected Time startTime;
+    protected Time endTime;
+
+    public Employee(String name){
+        this(name, 0, 0);
+    }
+
+    public Employee(String name, int startTime, int endTime){
+        this(name, new Time(startTime), new Time(endTime));
+    }
+
+    public Employee(String name, Time startTime, Time endTime){
+        this.name = name;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
 
-	private AbstractEmployeeSkillset skillSet;
+    public void setName(String name){
+        this.name = name;
+    }
 
-	public Employee(String name, int numOfSkills  ){
-		this.name = name;
-		..skillSet =
+    public void setStartTime(Time aTime){
+        this.startTime = aTime;
+    }
 
-		for (int i = 0; i < numOfSkills; i++){
+    public void setEndTime(Time aTime){
+        this.endTime = aTime;
+    }
 
-		}
-	}
+    public String getName(){
+        return this.name;
+    }
 
-	
-*/
+    public Time getStartTime(){
+        return this.startTime;
+    }
+
+    public Time getEndTime(){
+        return this.endTime;
+    }
 }
