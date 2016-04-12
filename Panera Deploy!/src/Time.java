@@ -21,12 +21,25 @@ public class Time implements Comparable<Time>{
 
 	//todo: C, could you make this so that the raw input from the spreadsheet is converted into time
 	public Time(String rawTime){
-
+		String T = "";
+		int add = 0;
+    		for(int i = 0; i < rawTime.length(); i ++){
+    			if (rawTime.charAt(i) == 'A'){
+    				add = 0;
+    			}else if (rawTime.charAt(i) == 'P'){
+    				add = 1200;
+    			}else if (rawTime.charAt(i) != ':'){
+    				T = T + rawTime.charAt(i);
+    			}
+    				
+    		}
+    		this.time = Integer.parseInt(T) + add;
 	}
 
     public void setTime(int time){
         this.time = time;
     }
+    
 
     public int getTime(){
         return this.time;
@@ -46,19 +59,20 @@ public class Time implements Comparable<Time>{
 	public String toString(){
 		String result = "";
 		String tempTime = Integer.toString(time);
-		if (time > 1000){
-			result += (tempTime.substring(0)) + ":" + tempTime.substring(1,2) + ",AM";
+		
+		if (time < 1000){
+			result = (tempTime.charAt(0)) + ":" + tempTime.charAt(1) + tempTime.charAt(2) + "AM";
 		}
 		else if (time < 1300){
-			result += tempTime.substring(0,1) + ":" + tempTime.substring(2,3) + ",AM";
+			result = tempTime.charAt(0) + tempTime.charAt(1) + ":" + tempTime.charAt(2) + tempTime.charAt(3) + "AM";
 		}
 		else if (time < 2200){
 			tempTime = Integer.toString(time - 1200);
-			result += tempTime.substring(0) + ":" + tempTime.substring(1,2) + ",PM";
+			result = tempTime.charAt(0) + ":" + tempTime.charAt(1) + tempTime.charAt(2) + "PM";
 		}
 		else {
 			tempTime = Integer.toString(time - 1200);
-			result += tempTime.substring(0,1) + ":" + tempTime.substring(2,3) + ",PM";
+			result = tempTime.charAt(0) + tempTime.charAt(1) + ":" + tempTime.charAt(2) + tempTime.charAt(3) + "PM";
 		}
 
 		return result;

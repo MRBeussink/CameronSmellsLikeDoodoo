@@ -4,15 +4,18 @@
 
 
 public class Employee {
-
-    protected String name;
+	
+    private String name;
     protected Time startTime;
     protected Time endTime;
 
     public Employee(String name){
         this(name, 0, 0);
     }
-
+    public Employee( String name, String startTime, String endTime){
+    	this(name, new Time(startTime),new Time(endTime));
+    }
+    
     public Employee(String name, int startTime, int endTime){
         this(name, new Time(startTime), new Time(endTime));
     }
