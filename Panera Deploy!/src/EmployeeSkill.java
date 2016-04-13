@@ -3,52 +3,70 @@
  */
 public class EmployeeSkill {
 
-    /*public enum Skill {
-        manager, prep, cordinator, dining, dishes, cashier, salad,
-        sandwhich, consolidator, expiditer
-    }*/
-
     enum Skills{
-        MANAGER("manager"),
-        PREP("prep"),
-        COORDINATOR("coordinator"),
-        DINING("dining"),
-        DISHES("dishes"),
-        CASHIER("cashier"),
-        SALAD("salad"),
-        SANDWHICH("sandwich"),
-        CONSOLIDATOR("consolidator"),
-        EXPEDITER("expediter");
-
-        final String SKILL_NAME;
-
-        private Skills(final String SKILL_NAME){
-            this.SKILL_NAME = SKILL_NAME;
-        }
-
+        MANAGER, PREP, COORDINATOR, DINING, DISHES,
+        CASHIER, SALAD, SANDWHICH, CONSOLIDATOR, EXPEDITER
     }
+    
+    final Skills skill;		//holds the state of the EmployeeSkill
 
-    Skills skill;
-
+    /** Constructor for a given case of Skills
+     * 
+     * @param skill
+     */
     public EmployeeSkill(Skills skill){
         this.skill = skill;
     }
 
-    //@Override
-    public boolean equals(Skills aSkill){
-        //return skill.SKILL_NAME == aSkill.SKILL_NAME;
-        return skill.equals(aSkill);
+    /** Constructor 
+     * 
+     * @param skill
+     */
+    public EmployeeSkill(String skill){
+    	this.skill = Skills.valueOf(skill);
     }
 
+    /** Returns wether or not the EmployeeSkill objects have the same value
+     * Used to match a position with a skill
+     *
+     * @param aSkill
+     * @return true if the skills match, false if otherwise
+     */
+    @Override
+    public boolean equals(Object aSkill){
+    	if (aSkill instanceof EmployeeSkill){
+    		EmployeeSkill that = (EmployeeSkill)aSkill;
+    		return this.skill == that.skill;
+    	}
+    	else
+    		return false;
+    }
+    
+    public String toString(){
+    	return skill.name();
+    }
+
+/*
     public static void main(String[] args){
 
         EmployeeSkill skill1 = new EmployeeSkill(Skills.PREP);
         EmployeeSkill skill2 = new EmployeeSkill(Skills.PREP);
+        EmployeeSkill skill3 = new EmployeeSkill("PREP");
 
-        System.out.println(skill1.equals(1));
+
+        //System.out.println(skill1.equals(1));
         System.out.println(skill1.equals((Skills.PREP)));
         System.out.println(skill1.equals(skill1));
-        System.out.println(skill1 == new EmployeeSkill(Skills.PREP));
+        System.out.println(skill1.equals(new EmployeeSkill(Skills.PREP)));
         System.out.println(skill1.equals(skill2));
+        System.out.println(skill1.equals(skill3));
+        System.out.println(skill1);
+
+
+        EmployeeSkill skill4 = new EmployeeSkill(skill1.toString());
+        System.out.println(skill1.equals(skill4));
+        System.out.println(skill4);
+
     }
+    */
 }

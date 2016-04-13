@@ -3,19 +3,16 @@
  */
 
 
-public class Employee {
-	
-    private String name;
+public class Employee implements Comparable<Employee>{
+
+    protected String name;
     protected Time startTime;
     protected Time endTime;
 
     public Employee(String name){
         this(name, 0, 0);
     }
-    public Employee( String name, String startTime, String endTime){
-    	this(name, new Time(startTime),new Time(endTime));
-    }
-    
+
     public Employee(String name, int startTime, int endTime){
         this(name, new Time(startTime), new Time(endTime));
     }
@@ -49,5 +46,10 @@ public class Employee {
 
     public Time getEndTime(){
         return this.endTime;
+    }
+
+    public int compareTo(Employee e){
+        Time t = new Time(e.getStartTime());
+        return startTime.compareTo(t);
     }
 }
