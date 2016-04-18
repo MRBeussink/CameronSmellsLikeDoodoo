@@ -129,7 +129,10 @@ public class Time implements Comparable<Object> {
 		}
 
 		if ((this.time % 100) >= 60){
-			time = (((time/10) * 10) + 100) + time % 60;
+			int minutes = (time % 100) % 60;
+			int hours = (time / 100) * 100 + 100;
+
+			time = hours + minutes;
 		}
 	}
 
@@ -156,6 +159,7 @@ public class Time implements Comparable<Object> {
 	}
 	*/
 
+	/*
 	public String toString(){
 		String result;
 		String tempTime = Integer.toString(time);
@@ -177,10 +181,32 @@ public class Time implements Comparable<Object> {
 
 		return result;
 	}
+*/
 
+	public String toString(){
+		String result = "";
+		String tempTime = Integer.toString(time);
+
+		if (time < 1000){
+			result = (tempTime.charAt(0)) + ":" + tempTime.charAt(1) + tempTime.charAt(2) + "AM";
+		}
+		else if (time < 1300){
+			result = "1" + tempTime.charAt(1) + ":" + tempTime.charAt(2) + tempTime.charAt(3) + "AM";
+		}
+		else if (time < 2200){
+			tempTime = Integer.toString(time - 1200);
+			result = tempTime.charAt(0) + ":" + tempTime.charAt(1) + tempTime.charAt(2) + "PM";
+		}
+		else {
+			tempTime = Integer.toString(time - 1200);
+			result = "1" + tempTime.charAt(1) + ":" + tempTime.charAt(2) + tempTime.charAt(3) + "PM";
+		}
+
+		return result;
+	}
 	public static void main(String[] args){
 
-		for(Time t = new Time(100); t.isBefore(2300); t.addTime(15)){
+		for(Time t = new Time(930); t.isBefore(2300); t.addTime(15)){
 			System.out.println(t.toString());
 		}
 	}
