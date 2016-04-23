@@ -70,6 +70,7 @@ public class Position {
     public Employee changeEmployee(Employee newEmployee){
         if (this.employee != null && newEmployee != null && !this.employee.equals(newEmployee)){
             Employee result = this.employee;
+            this.employee.changedPosition();
             this.employee = newEmployee;
             return result;
         }

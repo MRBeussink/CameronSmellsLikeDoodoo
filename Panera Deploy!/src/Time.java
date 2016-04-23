@@ -8,13 +8,6 @@
 public class Time implements Comparable<Object> {
 	private int time;		//stores hours and minutes in 24hr time
 
-    /*
-	//This represents whether the time is AM, PM, or in 24hr/military time
-	public enum Meridian{
-		AM, PM, X
-	}
-    */
-
 	public Time(int time){
 		this.time = time;
 	}
@@ -136,52 +129,6 @@ public class Time implements Comparable<Object> {
 		}
 	}
 
-	/*
-	public String toString(){
-		String result = "";
-		String tempTime = Integer.toString(time);
-		if (time > 1000){
-			result += (tempTime.substring(0)) + ":" + tempTime.substring(1,2) + ",AM";
-		}
-		else if (time < 1300){
-			result += tempTime.substring(0,1) + ":" + tempTime.substring(2,3) + ",AM";
-		}
-		else if (time < 2200){
-			tempTime = Integer.toString(time - 1200);
-			result += tempTime.substring(0) + ":" + tempTime.substring(1,2) + ",PM";
-		}
-		else {
-			tempTime = Integer.toString(time - 1200);
-			result += tempTime.substring(0,1) + ":" + tempTime.substring(2,3) + ",PM";
-		}
-
-		return result;
-	}
-	*/
-
-	/*
-	public String toString(){
-		String result;
-		String tempTime = Integer.toString(time);
-
-		if (time < 1000){
-			result = (tempTime.charAt(0)) + ":" + tempTime.charAt(1) + tempTime.charAt(2) + "AM";
-		}
-		else if (time < 1300){
-			result = tempTime.charAt(0) + tempTime.charAt(1) + ":" + tempTime.charAt(2) + tempTime.charAt(3) + "AM";
-		}
-		else if (time < 2200){
-			tempTime = Integer.toString(time - 1200);
-			result = tempTime.charAt(0) + ":" + tempTime.charAt(1) + tempTime.charAt(2) + "PM";
-		}
-		else {
-			tempTime = Integer.toString(time - 1200);
-			result = tempTime.charAt(0) + tempTime.charAt(1) + ":" + tempTime.charAt(2) + tempTime.charAt(3) + "PM";
-		}
-
-		return result;
-	}
-*/
 
 	public String toString(){
 		String result = "";
@@ -204,11 +151,12 @@ public class Time implements Comparable<Object> {
 
 		return result;
 	}
+	/*
 	public static void main(String[] args){
 
 		for(Time t = new Time(930); t.isBefore(2300); t.addTime(15)){
 			System.out.println(t.toString());
 		}
 	}
-
+	*/
 }
