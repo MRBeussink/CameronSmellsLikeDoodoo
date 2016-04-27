@@ -51,4 +51,16 @@ public class EmployeeSkillMap {
         ensureInstance(name);
         map.get(name).add(skill);
     }
+
+    public boolean checkSkill(String name, EmployeeSkill skill){
+        boolean result = false;
+        ArrayList s = map.get(name);
+        for (int i = 0; i < s.size(); i++){
+            if (s.get(i).equals(skill)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
 }

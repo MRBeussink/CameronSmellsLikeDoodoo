@@ -1,5 +1,5 @@
-/**
- * Created by Mark on 4/9/16.
+/** This class represents the skills an employee posses and must have to fill a positon
+ *
  */
 public class EmployeeSkill {
 

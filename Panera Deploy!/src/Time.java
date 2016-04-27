@@ -1,9 +1,9 @@
-/** This class represents a certain time and can convert from military/24 hour to 12 hour time and back.
+/** This class represents a certain time.
  * Also, it allows the user to compare an integer representation of time to a Time object
  * 
  * @author Mark
  *
- *To-do: Use regular expressions in converting from String to integer+enum pair
+ *
  */
 public class Time implements Comparable<Object> {
 	private int time;		//stores hours and minutes in 24hr time
@@ -55,7 +55,11 @@ public class Time implements Comparable<Object> {
 			return false;
 	}
 
-
+	/**
+	 *
+	 * @param aTime
+	 * @return
+     */
 	public int compareTo(Object aTime){
 		if (aTime instanceof Time) {
 			Time that = (Time) aTime;

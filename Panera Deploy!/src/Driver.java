@@ -5,8 +5,8 @@ public class Driver {
 
     /*
 
-    final int OPENING_TIME = ?  todo: what is opening time
-    final int CLOSING_TIME = ?  todo: what is closing time
+    final int OPENING_TIME = 500
+    final int CLOSING_TIME = 2300
 
     make Schedule of employees
 
@@ -23,7 +23,7 @@ public class Driver {
         make empty collection for assignedPositionsFront, assignedPositionsDriveThru
 
         for (Time currentTime = new Time(OPENING_TIME); currentTime.isBefore(CLOSING_TIME) ||
-            employeeList.isEmpty
+            !employeeList.isEmpty(); currentTime.addTime(15))
 
      */
 }

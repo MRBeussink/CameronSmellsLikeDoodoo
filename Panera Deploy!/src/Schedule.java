@@ -2,6 +2,7 @@ import java.util.PriorityQueue;
 
 public class Schedule {
 
+    //Queues for the front positions
     protected PriorityQueue<Employee> MondayFrontQ;
     protected PriorityQueue<Employee> TuesdayFrontQ;
     protected PriorityQueue<Employee> WednesdayFrontQ;
@@ -10,6 +11,7 @@ public class Schedule {
     protected PriorityQueue<Employee> SaturdayFrontQ;
     protected PriorityQueue<Employee> SundayFrontQ;
 
+    //Queues for the drive thru positions
     protected PriorityQueue<Employee> MondayDriveThruQ;
     protected PriorityQueue<Employee> TuesdayDriveThruQ;
     protected PriorityQueue<Employee> WednesdayDriveThruQ;
@@ -19,16 +21,16 @@ public class Schedule {
     protected PriorityQueue<Employee> SundayDriveThruQ;
 
     /*
-    public enum Days{
-        Mon(6), Tues(7), Wed(1), Thurs(2), Fri(3), Sat(4), Sun(5);
+        This class (and the rest of the project) use Wednesay as the first day of the week
 
-        final int DayOfWeek;
-
-        private Days(final int DayOfWeek){
-            this.DayOfWeek = DayOfWeek;
-        }
-    }
-    */
+        1 - Wednesday
+        2 - Thursday
+        3 - Friday
+        4 - Saturday
+        5 - Sunday
+        6 - Monday
+        7 - Tuesday
+     */
 
     public Schedule(){
         MondayFrontQ = new PriorityQueue<Employee>();
