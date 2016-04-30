@@ -2,7 +2,7 @@
 /**
  * Created by Mark on 4/10/16.
  */
-
+ 
 public class Position implements Comparable<Position> {
     private int row, col, page;     //these variables are for the deployment spreadsheets
     private boolean priority;       //if a position MUST be filled, this should be true
@@ -24,6 +24,9 @@ public class Position implements Comparable<Position> {
         this.page = page;
         this.priority = priority;
         this.skill = skill;
+    }
+    public Position(String skill, boolean priority, int page, int row, int col){
+    	this(new EmployeeSkill(skill), priority, page, row, col);
     }
 
     public EmployeeSkill getSkill(){

@@ -17,12 +17,15 @@ public class EmployeeSkillMap {
      *
      * @param key The key to search for
      */
-    private void ensureInstance(String key){
-        if (map.get(key) == null && map.containsKey(key))
-            map.put(key, new ArrayList());
-        else if (!map.containsKey(key))
+    private boolean ensureInstance(String key){
+        boolean found = false;
+    	if (map.get(key) != null && map.containsKey(key))
+            found = true;
+        else if (!map.containsKey(key)){
             System.out.println("ERROR: No entry for Key: " + key +
                 " found.");
+        }
+    	return found;
     }
 
     /** Returns the TreeMap
@@ -48,8 +51,12 @@ public class EmployeeSkillMap {
      * @param skill the skill to be added
      */
     public void addSkill(String name, EmployeeSkill skill){
-        ensureInstance(name);
-        map.get(name).add(skill);
+        if(ensureInstance(name))
+        	map.get(name).add(skill);
+    }
+    
+    public void addSkill(String name, String skill){
+    	addSkill(name, new EmployeeSkill(skill));
     }
 
     public boolean checkSkill(String name, EmployeeSkill skill){

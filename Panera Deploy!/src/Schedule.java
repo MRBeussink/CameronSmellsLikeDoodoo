@@ -21,7 +21,7 @@ public class Schedule {
     protected PriorityQueue<Employee> SundayDriveThruQ;
 
     /*
-        This class (and the rest of the project) use Wednesay as the first day of the week
+        This class (and the rest of the project) use Wednesday as the first day of the week
 
         1 - Wednesday
         2 - Thursday

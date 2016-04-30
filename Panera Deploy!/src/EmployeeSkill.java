@@ -1,11 +1,11 @@
-/** This class represents the skills an employee posses and must have to fill a positon
+/** This class represents the skills an employee possess and must have to fill a position
  *
  */
 public class EmployeeSkill {
 
     enum Skills{
         MANAGER, PREP, MORNINGPREP, COORDINATOR, BREAKFAST, DINING, DISHES,
-        CASHIER, SALAD, SANDWHICH, CONSOLIDATOR, EXPEDITER
+        CASHIER, SALAD, SANDWHICH, CONSOLIDATOR, EXPEDITER, SUPPORT
     }
     
     final Skills skill;		//holds the state of the EmployeeSkill
@@ -26,7 +26,7 @@ public class EmployeeSkill {
     	this.skill = Skills.valueOf(skill);
     }
 
-    /** Returns wether or not the EmployeeSkill objects have the same value
+    /** Returns whether or not the EmployeeSkill objects have the same value
      * Used to match a position with a skill
      *
      * @param aSkill
