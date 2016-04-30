@@ -18,7 +18,7 @@ public class Position implements Comparable<Position> {
 
     private Position carryOverPosition;
 
-    public Position(int row, int col, int page, boolean priority, EmployeeSkill skill){
+    public Position(EmployeeSkill skill, boolean priority, int page, int row, int col){
         this.row = row;
         this.col = col;
         this.page = page;
