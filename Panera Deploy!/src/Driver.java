@@ -1,29 +1,54 @@
 /**
  * Created by Mark on 4/19/16.
  */
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
 public class Driver {
 
-    /*
+    public static boolean test = true;
 
-    final int OPENING_TIME = 500
-    final int CLOSING_TIME = 2300
+    public static void main(String[] args){
+        //get schedule
 
-    make Schedule of employees
+        //get skills
 
-    get map(think dictionary) of Employee names -> SkillSet
+        //loop for 7 days
+            //get today's employees
+            //assign employees to positions
+            //fill deployment sheet
+        try {
+            ExcelReader scheduleReader = new ExcelReader();
+            Schedule employeeSchedule = new Schedule();
+            scheduleReader.getSchedule(employeeSchedule);
 
-    //for each day of the week
-    for (int day = 1; day > 8; day++)
-        get QUEUE of today's employees up front and in drive thru
-        get collection of
-        make any special matches (AM manager, Catering Coordinator (todo: ARE THERE ANY OTHERS?))
+            try{
+                SkillReader skillReader = new SkillReader();
+                EmployeeSkillMap skillMap = new EmployeeSkillMap();
+                skillReader.makeEmployeeSkillMap();
 
-        !!
+                try{
+                    PositionReader positionReader = new PositionReader();
+                    PriorityQueue<Position> frontPositionsQueue = positionReader.getFrontQ();
+                    PriorityQueue<Position> drivePositionsQueue = positionReader.getDriveQ();
 
-        make empty collection for assignedPositionsFront, assignedPositionsDriveThru
+                    /* MAGIC! */
+                    MatchMaker matcher = new MatchMaker(skillMap, frontPositionsQueue);
+                    ArrayList<Position> assignedFront = matcher.match(employeeSchedule.getSchedule(1, false), false);
 
-        for (Time currentTime = new Time(OPENING_TIME); currentTime.isBefore(CLOSING_TIME) ||
-            !employeeList.isEmpty(); currentTime.addTime(15))
-
-     */
+                }
+                catch(IOException e){
+                    System.out.println("ERROR: Unable to load Positions file.");
+                }
+            }
+            catch(IOException e){
+                System.out.println("ERROR: Unable to load Skill file.");
+            }
+        }
+        catch(IOException e){
+            System.out.println("ERROR: Unable to load Schedule file.");
+        }
+    }
 }
