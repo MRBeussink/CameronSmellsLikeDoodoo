@@ -44,14 +44,15 @@ public class PositionReader {
 				Cell cell = row.getCell(column);
 				if(cell != null){
 					String check = cell.getStringCellValue();
+
 					switch(column){
 						case 0:
 							skill = check;
 							break;
 						case 1:
-							if( "TRUE".equals(check)){
+							if( "T".equals(check)){
 								priority = true;
-							}else if("FALSE".equals(check)){
+							}else if("F".equals(check)){
 								priority = false;
 							}
 							break;
