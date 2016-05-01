@@ -42,6 +42,7 @@ public class EmployeeSkillMap {
      */
     public void addEmployee(String name){
         map.put(name, new ArrayList());
+        ensureKey(name);
     }
 
     /**Adds a skill to the ArrayList mapped to the employee
@@ -50,15 +51,18 @@ public class EmployeeSkillMap {
      * @param skill the skill to be added
      */
     public void addSkill(String name, EmployeeSkill skill){
+        ensureKey(name);
         if(ensureInstance(name))
             map.get(name).add(skill);
     }
 
     public void addSkill(String name, String skill){
+        ensureKey(name);
          addSkill(name, new EmployeeSkill(skill));
     }
 
     public boolean checkSkill(String name, EmployeeSkill skill){
+        ensureKey(name);
         boolean result = false;
         ArrayList s = map.get(name);
         for (int i = 0; i < s.size(); i++){
@@ -71,7 +75,14 @@ public class EmployeeSkillMap {
     }
 
     public int getNumberOfSkills(String name){
+        ensureKey(name);
     	System.out.println("Retrieving Size");
         return map.get(name).size();
+    }
+
+    public void ensureKey(String name){
+        if(!map.containsKey(name)){
+            System.out.println("ERROR: Map does not contain KEY: " + name);
+        }
     }
 }

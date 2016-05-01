@@ -31,7 +31,7 @@ public class Driver {
                    System.out.println("Making skills map...");
                 SkillReader skillReader = new SkillReader();
                 EmployeeSkillMap skillMap = new EmployeeSkillMap();
-                skillReader.makeEmployeeSkillMap();
+                skillMap = skillReader.makeEmployeeSkillMap();
 
                 try{
                     if(test)

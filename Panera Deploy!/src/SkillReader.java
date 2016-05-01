@@ -22,7 +22,7 @@ public class SkillReader {
 		sheet = wb.getSheetAt(0);
 	}
 	
-	public void makeEmployeeSkillMap(){
+	public EmployeeSkillMap makeEmployeeSkillMap(){
 		 String name = "";
 		 
 		for (Row row : sheet){
@@ -45,6 +45,7 @@ public class SkillReader {
 				
 			}
 		}
+		return skillMap;
 	}
 	
 }

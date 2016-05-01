@@ -134,11 +134,13 @@ public class MatchMaker {
                             }
                         }
                     }
-                    else if (Driver.test)
-                    	System.out.println("Failed to start step 1");
-                }
+                }if(Driver.test)
+                    System.out.println("Did not find any employees with 1 skill\nMoving to step 2.");
                 //repeats steps 2 and 3 until list of unassigned employees is empty
                 while (!unassignedEmployees.isEmpty()) {
+                    if(Driver.test){
+                        System.out.println("Starting step 2.");
+                    }
                     //second assign an employee to any positions that have only one employee to match
                     for (int i = 0; i < unassignedEmployees.size(); i++) {
                         //loop thru as many temp positions as there are employees, and count how many employees can fill that skill
@@ -180,6 +182,9 @@ public class MatchMaker {
                     }
                 }
             }
+        }
+        if(Driver.test){
+            System.out.println("Finished matching.");
         }
         return assignedPositions;
     }
