@@ -30,11 +30,16 @@ public class SkillReader {
 				Cell cell = row.getCell(column);
 				if( cell != null){
 					String info = cell.getStringCellValue();
-					if(column == 1){
+					if(column == 0){
 						name = info;
+						if(Driver.test)
+							System.out.println("Adding Employee " + info + " to SkillMap");
 						skillMap.addEmployee(info);
-					}else
+					}else {
+						if(Driver.test)
+							System.out.println("Adding Skill: " + info +" to employee: " + name);
 						skillMap.addSkill(name, info);
+					}
 				}else
 					break;
 				

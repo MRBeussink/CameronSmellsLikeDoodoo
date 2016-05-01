@@ -20,21 +20,28 @@ public class Driver {
             //assign employees to positions
             //fill deployment sheet
         try {
+            if(test)
+                System.out.println("Making schedule...");
             ExcelReader scheduleReader = new ExcelReader();
             Schedule employeeSchedule = new Schedule();
             scheduleReader.getSchedule(employeeSchedule);
 
             try{
+                if(test)
+                   System.out.println("Making skills map...");
                 SkillReader skillReader = new SkillReader();
                 EmployeeSkillMap skillMap = new EmployeeSkillMap();
                 skillReader.makeEmployeeSkillMap();
 
                 try{
+                    if(test)
+                        System.out.println("Making position arrays");
                     PositionReader positionReader = new PositionReader();
                     PriorityQueue<Position> frontPositionsQueue = positionReader.getFrontQ();
                     PriorityQueue<Position> drivePositionsQueue = positionReader.getDriveQ();
 
                     /* MAGIC! */
+                    //todo We need someway of copying the arrays, since it removes them
                     MatchMaker matcher = new MatchMaker(skillMap, frontPositionsQueue);
                     ArrayList<Position> assignedFront = matcher.match(employeeSchedule.getSchedule(1, false), false);
 

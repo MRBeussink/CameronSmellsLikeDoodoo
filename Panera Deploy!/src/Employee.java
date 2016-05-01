@@ -3,7 +3,7 @@
  */
 
 
-public class Employee {
+public class Employee implements Comparable<Employee>{
 	
     private String name;        //holds the name of the employee
     protected Time startTime;   //holds the starting time of the employee
@@ -123,5 +123,16 @@ public class Employee {
     @Override
     public String toString(){
         return getName();
+    }
+
+    public int compareTo(Employee anEmployee){
+        int result;
+        if(this.getStartTime().isBefore(anEmployee.getStartTime()))
+            result = 1;
+        else if (this.getStartTime().equals(anEmployee.getStartTime()))
+            result = 0;
+        else
+            result = -1;
+        return result;
     }
 }

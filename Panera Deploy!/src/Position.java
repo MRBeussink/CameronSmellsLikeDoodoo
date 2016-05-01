@@ -128,8 +128,4 @@ public class Position implements Comparable<Position> {
 
         return result;
     }
-
-
-
-
 }

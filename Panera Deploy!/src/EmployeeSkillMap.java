@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class EmployeeSkillMap {
 
-    TreeMap<String, ArrayList<EmployeeSkill>> map;
+    private TreeMap<String, ArrayList<EmployeeSkill>> map;
 
     public EmployeeSkillMap(){
         map = new TreeMap();
@@ -18,14 +18,13 @@ public class EmployeeSkillMap {
      * @param key The key to search for
      */
     private boolean ensureInstance(String key){
-        boolean found = false;
-    	if (map.get(key) != null && map.containsKey(key))
-            found = true;
-        else if (!map.containsKey(key)){
+        boolean result = false;
+        if (map.containsKey(key) && key != null)
+            result = true;
+        else if (!map.containsKey(key))
             System.out.println("ERROR: No entry for Key: " + key +
                 " found.");
-        }
-    	return found;
+        return result;
     }
 
     /** Returns the TreeMap
@@ -52,11 +51,11 @@ public class EmployeeSkillMap {
      */
     public void addSkill(String name, EmployeeSkill skill){
         if(ensureInstance(name))
-        	map.get(name).add(skill);
+            map.get(name).add(skill);
     }
-    
+
     public void addSkill(String name, String skill){
-    	addSkill(name, new EmployeeSkill(skill));
+         addSkill(name, new EmployeeSkill(skill));
     }
 
     public boolean checkSkill(String name, EmployeeSkill skill){
@@ -69,5 +68,9 @@ public class EmployeeSkillMap {
             }
         }
         return result;
+    }
+
+    public int getNumberOfSkills(String name){
+        return map.get(name).size();
     }
 }

@@ -1,11 +1,13 @@
-/** This class represents the skills an employee possess and must have to fill a position
+/** This class represents the skills an employee posses and must have to fill a positon
  *
  */
 public class EmployeeSkill {
 
+
+    //todo remove production as skill
     enum Skills{
         MANAGER, PREP, MORNINGPREP, COORDINATOR, BREAKFAST, DINING, DISHES,
-        CASHIER, SALAD, SANDWHICH, CONSOLIDATOR, EXPEDITER, SUPPORT
+        CASHIER, SALAD, SANDWICH, CONSOLIDATOR, EXPEDITER, SUPPORT, PRODUCTION;
     }
     
     final Skills skill;		//holds the state of the EmployeeSkill

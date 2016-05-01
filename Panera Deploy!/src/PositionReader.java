@@ -37,7 +37,7 @@ public class PositionReader {
 		driveSheet = driveWB.getSheetAt(0);
 		
 	}
-	public void getFrontPositions(){
+	private void getFrontPositions(){
 		frontQ = new PriorityQueue<Position>();
 		for(Row row: frontSheet){
 			for(int column = 0; column < 5; column++){
@@ -73,7 +73,7 @@ public class PositionReader {
 		}
 	}
 	
-	public void getDrivePositions(){
+	private void getDrivePositions(){
 		frontQ = new PriorityQueue<Position>();
 		for(Row row: driveSheet){
 			for(int column = 0; column < 5; column++){
@@ -110,10 +110,16 @@ public class PositionReader {
 	}
 	
 	public PriorityQueue getFrontQ(){
+		if (frontQ == null){
+			getFrontPositions();
+		}
 		return frontQ;
 	}
 	
 	public PriorityQueue getDriveQ(){
+		if (driveQ == null){
+			getDrivePositions();
+		}
 		return driveQ;
 	}
 	

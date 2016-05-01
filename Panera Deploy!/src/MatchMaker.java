@@ -22,6 +22,10 @@ public class MatchMaker {
         this.breakTheRules = false;
     }
 
+    public void setPostionQueue(PriorityQueue<Position> newPositionQueue){
+        this.unassignedPositions = newPositionQueue;
+    }
+
     public ArrayList<Position> match(PriorityQueue<Employee> employeeQ, boolean driveThru){
 
         ArrayList<Position> assignedPositions = new ArrayList(employeeQ.size());    //holds the final list of Positions
