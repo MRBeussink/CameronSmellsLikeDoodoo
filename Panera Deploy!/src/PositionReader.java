@@ -23,9 +23,9 @@ public class PositionReader {
 	private XSSFSheet driveSheet;
 	private String skill;
 	private boolean priority;
-	private int page;
-	private int row1;
-	private int col;
+	private double page;
+	private double row1;
+	private double col;
 	
 	
 	public PositionReader() throws IOException{
@@ -43,27 +43,27 @@ public class PositionReader {
 			for(int column = 0; column < 5; column++){
 				Cell cell = row.getCell(column);
 				if(cell != null){
-					String check = cell.getStringCellValue();
-
+					 
 					switch(column){
 						case 0:
+							String check = cell.getStringCellValue();
 							skill = check;
 							break;
 						case 1:
-							if( "T".equals(check)){
-								priority = true;
-							}else if("F".equals(check)){
-								priority = false;
-							}
+							boolean check1 = cell.getBooleanCellValue();
+							priority = check1;
 							break;
 						case 2:
-							page = Integer.parseInt(check);
+							double check2  = cell.getNumericCellValue();
+							page = check2;
 							break;
 						case 3:
-							row1 = Integer.parseInt(check);
+							double check3 = cell.getNumericCellValue();
+							row1 = check3;
 							break;
 						case 4:
-							col = Integer.parseInt(check);
+							double check4 = cell.getNumericCellValue();
+							col = check4;
 							break;
 							
 					}

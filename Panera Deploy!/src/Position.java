@@ -4,7 +4,7 @@
  */
  
 public class Position implements Comparable<Position> {
-    private int row, col, page;     //these variables are for the deployment spreadsheets
+    private double row, col, page;     //these variables are for the deployment spreadsheets
     private boolean priority;       //if a position MUST be filled, this should be true
 
     private Employee employee;      //the employee who fills this position
@@ -18,14 +18,14 @@ public class Position implements Comparable<Position> {
 
     private Position carryOverPosition;
 
-    public Position(EmployeeSkill skill, boolean priority, int page, int row, int col){
+    public Position(EmployeeSkill skill, boolean priority, double page, double row, double col){
         this.row = row;
         this.col = col;
         this.page = page;
         this.priority = priority;
         this.skill = skill;
     }
-    public Position(String skill, boolean priority, int page, int row, int col){
+    public Position(String skill, boolean priority, double page, double row, double col){
     	this(new EmployeeSkill(skill), priority, page, row, col);
     }
 
@@ -33,15 +33,15 @@ public class Position implements Comparable<Position> {
         return this.skill;
     }
 
-    public int getRow(){
+    public double getRow(){
         return this.row;
     }
 
-    public int getCol(){
+    public double getCol(){
         return this.row;
     }
 
-    public int getPage(){
+    public double getPage(){
         return this.page;
     }
 
@@ -90,8 +90,8 @@ public class Position implements Comparable<Position> {
      *
      * @return an int from 0 to 3, if it is 5, then something went wrong
      */
-    public int getOrderOfImport(){
-        int result = 5;
+    public double getOrderOfImport(){
+        double result = 5;
 
         /* HEY CAMERON
         todo make sure that these are all of the special cases
