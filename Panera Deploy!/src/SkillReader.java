@@ -30,6 +30,9 @@ public class SkillReader {
 				Cell cell = row.getCell(column);
 				if( cell != null){
 					String info = cell.getStringCellValue();
+					if (info == null || info.equals("")){
+						break;
+					}
 					if(column == 0){
 						name = info;
 						if(Driver.test)
@@ -38,6 +41,8 @@ public class SkillReader {
 					}else {
 						if(Driver.test)
 							System.out.println("Adding Skill: " + info +" to employee: " + name);
+						if(Driver.test && info == null)
+							System.out.println("ERROR: Trying to parse null string to Enum");
 						skillMap.addSkill(name, info);
 					}
 				}else

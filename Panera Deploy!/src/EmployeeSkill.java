@@ -25,7 +25,7 @@ public class EmployeeSkill {
      * @param skill
      */
     public EmployeeSkill(String skill){
-    	this.skill = Skills.valueOf(skill);
+    	    this.skill = Skills.valueOf(skill);
     }
 
     /** Returns whether or not the EmployeeSkill objects have the same value
