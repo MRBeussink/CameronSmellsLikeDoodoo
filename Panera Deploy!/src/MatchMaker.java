@@ -101,7 +101,7 @@ public class MatchMaker {
             while(!unassignedEmployees.isEmpty()){
             	System.out.println("Made it to the Magic");
                 //first assign any employees with only 1 skill
-                for (int i = 0; i <= unassignedEmployees.size(); i++){
+                for (int i = 0; i < unassignedEmployees.size(); i++){
                     //find any employee with only one skill
                     if(skills.getNumberOfSkills(unassignedEmployees.get(i).getName()) == 1){
                     	System.out.println("found an employee with only one skill");
