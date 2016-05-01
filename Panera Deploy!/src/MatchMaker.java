@@ -60,6 +60,7 @@ public class MatchMaker {
         for(Time currentTime = new Time(OPENING_TIME); currentTime.isBefore(CLOSING_TIME) ||
                 !employeeQ.isEmpty(); currentTime.addTime(15)){
 
+        	/*
             //check if it is the start of a new shift
             if(currentTime.equals(LUNCH_SHIFT) || currentTime.equals(DINNER_SHIFT)) {
                 //empty out temp list of positions
@@ -79,8 +80,10 @@ public class MatchMaker {
                         System.out.println("Flushing unassigned dinner positions");
                 }
             }
+            */
 
-
+        	if(Driver.test)
+        		System.out.println(currentTime);
             //move any employees just now coming in to the list of employees needing a position
             while(employeeQ.peek().getStartTime().equals(currentTime)) {
                 unassignedEmployees.add(employeeQ.remove());
@@ -123,6 +126,8 @@ public class MatchMaker {
                             }
                         }
                     }
+                    else if (Driver.test)
+                    	System.out.println("Failed to start step 1");
                 }
                 //repeats steps 2 and 3 until list of unassigned employees is empty
                 while (!unassignedEmployees.isEmpty()) {
@@ -155,7 +160,7 @@ public class MatchMaker {
                     }
 
                     //third assign the next employee in the list to the first position then can fill
-                    //todo if we want to include TRYING TO MAKE THE BEST MATCH then this is where it would be
+                    //TODO:want to include TRYING TO MAKE THE BEST MATCH then this is where it would be
                     for(int i = 0; i < unassignedEmployees.size(); i++){
                         if(skills.checkSkill(unassignedEmployees.get(0).getName(), temp.get(i).getSkill())){
                             if(Driver.test)

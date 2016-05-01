@@ -10,9 +10,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelReader {
 
-	private String name = "";
-	private String in = "";
-	private String out = "";
+	private String name = null;
+	private String in = null;
+	private String out = null;
 	private FileInputStream fis;
 	private XSSFWorkbook wb;
 	private XSSFSheet sheet;
@@ -30,6 +30,8 @@ public class ExcelReader {
 				Cell cell = row.getCell(column);
 				//get the cell value if found to be not null
 				if(cell != null){
+					int checker = cell.getCellType();
+					System.out.println(checker);
 					String check = cell.getStringCellValue();
 				if(column == 0){
 					//Assigns a name value for the entire week of times
@@ -118,12 +120,14 @@ public class ExcelReader {
 						}
 						test++;
 					}
+					if (name != null && in != null && out != null){
 					//creates a new employee with a name, start time, and end time
 					Employee currentEmployee = new Employee(name, in, out);
-					
+					System.out.println(name + in + out);
 					// adds the current employee to a PriorityQue
 					s.add(currentEmployee, column, drive);
-								
+					System.out.println(currentEmployee.getName() + column + drive);
+					}		
 					}
 					
 				}

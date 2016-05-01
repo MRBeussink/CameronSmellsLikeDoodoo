@@ -37,8 +37,12 @@ public class Driver {
                     if(test)
                         System.out.println("Making position arrays");
                     PositionReader positionReader = new PositionReader();
+                    if(test)
+                    	System.out.println("Trying to get Front Positions...");
                     PriorityQueue<Position> frontPositionsQueue = positionReader.getFrontQ();
-                    PriorityQueue<Position> drivePositionsQueue = positionReader.getDriveQ();
+                    if(test)
+                    	System.out.println("Trying to get Drive Thru Positions...");
+               //     PriorityQueue<Position> drivePositionsQueue = positionReader.getDriveQ();
 
                     /* MAGIC! */
                     //todo We need someway of copying the arrays, since it removes them
