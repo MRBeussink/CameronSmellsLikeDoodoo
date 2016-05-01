@@ -85,18 +85,26 @@ public class MatchMaker {
         	if(Driver.test)
         		System.out.println(currentTime);
             //move any employees just now coming in to the list of employees needing a position
+        	System.out.println("CurrentTime");
+        	
             while(employeeQ.peek().getStartTime().equals(currentTime)) {
+            	Employee x = employeeQ.peek();
+        	System.out.println(x.getName() + x.getStartTime() + x.getEndTime());
+            	
                 unassignedEmployees.add(employeeQ.remove());
+                
                 temp.add(unassignedPositions.remove());
+               
             }
 
             //where the magic happens
             while(!unassignedEmployees.isEmpty()){
-
+            	System.out.println("Made it to the Magic");
                 //first assign any employees with only 1 skill
                 for (int i = 0; i <= unassignedEmployees.size(); i++){
                     //find any employee with only one skill
                     if(skills.getNumberOfSkills(unassignedEmployees.get(i).getName()) == 1){
+                    	System.out.println("found an employee with only one skill");
                         //search temp list of positions
                         for(int j = 0; j > temp.size(); j++){
                             //if there is a position that matches the current employee's skill

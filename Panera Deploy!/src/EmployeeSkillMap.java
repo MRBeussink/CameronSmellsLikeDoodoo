@@ -71,6 +71,7 @@ public class EmployeeSkillMap {
     }
 
     public int getNumberOfSkills(String name){
+    	System.out.println("Retrieving Size");
         return map.get(name).size();
     }
 }

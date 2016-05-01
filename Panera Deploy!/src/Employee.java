@@ -128,11 +128,11 @@ public class Employee implements Comparable<Employee>{
     public int compareTo(Employee anEmployee){
         int result;
         if(this.getStartTime().isBefore(anEmployee.getStartTime()))
-            result = 1;
+            result = -1;
         else if (this.getStartTime().equals(anEmployee.getStartTime()))
             result = 0;
         else
-            result = -1;
+            result = 1;
         return result;
     }
 }
