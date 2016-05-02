@@ -48,7 +48,9 @@ public class Driver {
                     //todo We need someway of copying the arrays, since it removes them
                     MatchMaker matcher = new MatchMaker(skillMap, frontPositionsQueue);
                     ArrayList<Position> assignedFront = matcher.match(employeeSchedule.getSchedule(1, false), false);
-
+                    if(test)
+                        for(int i = 0; i < assignedFront.size(); i++)
+                            System.out.println(assignedFront.get(i));
                 }
                 catch(IOException e){
                     System.out.println("ERROR: Unable to load Positions file.");
