@@ -4,7 +4,8 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
+//import java.util.PriorityQueue;
+import java.util.ArrayDeque;
 
 public class Driver {
 
@@ -39,7 +40,7 @@ public class Driver {
                     PositionReader positionReader = new PositionReader();
                     if(test)
                     	System.out.println("Trying to get Front Positions...");
-                    PriorityQueue<Position> frontPositionsQueue = positionReader.getFrontQ();
+                    ArrayDeque<Position> frontPositionsQueue = positionReader.getFrontQ();
                     if(test)
                     	System.out.println("Trying to get Drive Thru Positions...");
                //     PriorityQueue<Position> drivePositionsQueue = positionReader.getDriveQ();
