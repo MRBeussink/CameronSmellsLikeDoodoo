@@ -63,72 +63,46 @@ public class MatchMaker {
         for(Time currentTime = new Time(OPENING_TIME); currentTime.isBefore(CLOSING_TIME) ||
                 employeeQ.isEmpty(); currentTime.addTime(15)){
 
-
+/*
             //check if it is the start of a new shift
-            if(currentTime.equals(LUNCH_SHIFT)) {
+            if(currentTime.equals(LUNCH_SHIFT) || currentTime.equals(DINNER_SHIFT)) {
                 //empty out temp list of positions
                 temp.clear();
-                if(Driver.test)
-                    System.out.println("Flushing unassigned lunch positions...");
 
-                while (unassignedPositions.peek().getOrderOfImport() == 2)
+                while (unassignedPositions.peek().getOrderOfImport() <= 1) {
                     unassignedPositions.remove();
-            }
 
-            if (currentTime.equals(DINNER_SHIFT)) {
-                if(Driver.test)
-                    System.out.println("Flushing unassigned dinner positions");
-                temp.clear();
-                while (unassignedPositions.peek().getOrderOfImport() == 3)
-                    unassignedPositions.remove();
-            }
+                    if (Driver.test && currentTime.equals(LUNCH_SHIFT))
+                        System.out.println("Flushing unassigned lunch positions...");
+                }
 
+                if (currentTime.equals(DINNER_SHIFT)) {
+                    while (unassignedPositions.peek().getOrderOfImport() <= 2)
+                        unassignedPositions.remove();
+                    if(Driver.test)
+                        System.out.println("Flushing unassigned dinner positions");
+                }
+            }
+*/
 
         	if(Driver.test)
         		System.out.println(currentTime);
             //move any employees just now coming in to the list of employees needing a position
             while(employeeQ.peek().getStartTime().equals(currentTime)) {
-                if(Driver.test)
-                    System.out.println("Employee: " + employeeQ.peek().getName() + "  has come in");
                 unassignedEmployees.add(employeeQ.remove());
-                if (temp.size() < unassignedEmployees.size())
-                    temp.add(unassignedPositions.remove());
+                temp.add(unassignedPositions.remove());
             }
 
-            if(Driver.test){
-                for(int i = 0; i < unassignedEmployees.size(); i++){
-                    System.out.println(unassignedEmployees.get(i).getName() + " is still looking for a job");
-                }
-            }
             //where the magic happens
             while(!unassignedEmployees.isEmpty()){
 
                 //if there is only one employee
                if (unassignedEmployees.size() == 1){
-                    for(int i = 0; i < temp.size(); i++) {
-                        if (skills.checkSkill(unassignedEmployees.get(0).getName(), temp.get(i).getSkill())) {
-                            if (Driver.test) {
-                                System.out.println("FOUND MATCH for Employee: " + unassignedEmployees.get(0).getName());
-                            }
+                    for(int i = 0; i < temp.size(); i++){
+                        if(skills.checkSkill(unassignedEmployees.get(0).getName(), temp.get(i).getSkill())){
                             temp.get(i).assignEmployee(unassignedEmployees.remove(0));
                             assignedPositions.add(temp.remove(i));
                             break;
-                        }
-                        if (!unassignedEmployees.isEmpty()) {
-                            if (Driver.test)
-                                System.out.println("MATCH NOT FOUND, looking thru list of unassigned positions");
-                            while (!skills.checkSkill(unassignedEmployees.get(i).getName(),
-                                    unassignedPositions.peek().getSkill())) {
-                                temp.add(unassignedPositions.remove());
-                                if (Driver.test)
-                                    System.out.println("Match not yet found...");
-                            }
-                            if (Driver.test)
-                                System.out.println("FOUND MATCH for Employee: " + unassignedEmployees.get(i).getName());
-                            //TODO Check to see if the positions are still in the same shift as the employee
-                            //assign employee to current position from unAssignedPositions
-                            unassignedPositions.peek().assignEmployee(unassignedEmployees.remove(i));   //assign employee to position
-                            assignedPositions.add(unassignedPositions.poll());                          //move position to list of assigned positions
                         }
                     }
                 }
