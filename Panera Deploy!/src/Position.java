@@ -38,7 +38,7 @@ public class Position implements Comparable<Position> {
     }
 
     public double getCol(){
-        return this.row;
+        return this.col;
     }
 
     public double getPage(){
@@ -131,5 +131,9 @@ public class Position implements Comparable<Position> {
 
     public String toString(){
         return "POSITION " + getSkill() + " - EMPLOYEE: " + this.employee.getName() + " ~~~";
+    }
+
+    public Employee getEmployee(){
+        return this.employee;
     }
 }
