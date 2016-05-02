@@ -1,6 +1,8 @@
 /**
  * Created by Mark on 4/29/16.
  */
+import com.sun.org.apache.bcel.internal.generic.GOTO;
+
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
@@ -41,6 +43,7 @@ public class MatchMaker {
         make sure the lunch manager is the second manager coming in
         unless there is none that come in before lunch then make it the opening manager - Cameron
          */
+        /*
         if (!driveThru){
 
             //remove all special cases from unassigned position queue
@@ -50,7 +53,7 @@ public class MatchMaker {
                     System.out.println("Removing SPECIAL positions");
             }
         }
-
+*/
         if(Driver.test)
             System.out.println("Beginning matching loop...");
 
@@ -92,9 +95,20 @@ public class MatchMaker {
 
             //where the magic happens
             while(!unassignedEmployees.isEmpty()){
+
+                //if there is only one employee
+               if (unassignedEmployees.size() == 1){
+                    for(int i = 0; i < temp.size(); i++){
+                        if(skills.checkSkill(unassignedEmployees.get(0).getName(), temp.get(i).getSkill())){
+                            temp.get(i).assignEmployee(unassignedEmployees.remove(0));
+                            assignedPositions.add(temp.get(i));
+                            break;
+                        }
+                    }
+                }
             	System.out.println("Made it to the Magic");
                 //first assign any employees with only 1 skill
-                for (int i = 0; i < unassignedEmployees.size(); i++){
+                for (int i = 0; i < unassignedEmployees.size() && unassignedEmployees.size() > 1; i++){
                     //find any employee with only one skill
                     if(skills.getNumberOfSkills(unassignedEmployees.get(i).getName()) == 1){
                     	System.out.println("found an employee with only one skill");
@@ -130,17 +144,18 @@ public class MatchMaker {
                 }if(Driver.test)
                     System.out.println("Did not find any employees with 1 skill\nMoving to step 2.");
                 //repeats steps 2 and 3 until list of unassigned employees is empty
-                while (!unassignedEmployees.isEmpty()) {
+                while (!unassignedEmployees.isEmpty() && unassignedEmployees.size() > 1) {
+
                     if(Driver.test){
                         System.out.println("Starting step 2.");
                     }
                     //second assign an employee to any positions that have only one employee to match
-                    for (int i = 0; i < unassignedEmployees.size(); i++) {
+                    for (int i = 0; i < unassignedEmployees.size() && unassignedEmployees.size() > 1; i++) {
                         //loop thru as many temp positions as there are employees, and count how many employees can fill that skill
                         //if only 1 employee can, assign them
                         //TODO is there a way to keep track of how many employees can fill a position without iterating over every position and employee?
                         int count = 0;
-                        for (int j = 0; j < unassignedEmployees.size(); j++) {
+                        for (int j = 0; j < unassignedEmployees.size() && unassignedEmployees.size() > 1; j++) {
                             int e = -1;
                             if (Driver.test)
                                 System.out.println("Potential ArrayOutOfBounds exception here...");
@@ -152,7 +167,7 @@ public class MatchMaker {
                                     continue;
                                 }
                             }
-                            //if only one employee
+                            //if only one employee matches
                             if (count == 1) {
                                 if(Driver.test) {
                                     System.out.println("FOUND MATCH for Employee: " + unassignedEmployees.get(e).getName());
@@ -160,8 +175,10 @@ public class MatchMaker {
                                 }
                                 temp.get(i).assignEmployee(unassignedEmployees.remove(e));     //assign employee at e
                                 assignedPositions.add(temp.remove(i));                         //move position to list of assignedPositions
-                                continue;
+                                if (unassignedEmployees.size() == 1)
+                                    break;
                             }
+
                         }
                     }
 
@@ -169,13 +186,16 @@ public class MatchMaker {
                     //TODO:want to include TRYING TO MAKE THE BEST MATCH then this is where it would be
                     if(Driver.test)
                         System.out.println("Starting Step 3");
-                    for(int i = 0; i < unassignedEmployees.size(); i++){
+                    for(int i = 0; i < unassignedEmployees.size() && unassignedEmployees.size() > 1; i++){
                         if(skills.checkSkill(unassignedEmployees.get(0).getName(), temp.get(i).getSkill())){
                             if(Driver.test)
                                 System.out.println("FOUND MATCH for Employee: " + unassignedEmployees.get(0).getName());
                             temp.get(i).assignEmployee(unassignedEmployees.remove(0));
                             assignedPositions.add(temp.remove(i));
                             break;
+                        }
+                        else{
+                            temp.add(unassignedPositions.poll());
                         }
                     }
                 }
