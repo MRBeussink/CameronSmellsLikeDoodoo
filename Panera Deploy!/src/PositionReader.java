@@ -2,7 +2,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.PriorityQueue;
+//import java.util.PriorityQueue;
+import java.util.ArrayDeque;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -11,8 +12,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class PositionReader {
 
-	private PriorityQueue<Position> frontQ;
-	private PriorityQueue<Position> driveQ;
+	private ArrayDeque<Position> frontQ;
+	private ArrayDeque<Position> driveQ;
 	private Position position;
 	
 	private FileInputStream frontPos;
@@ -38,7 +39,7 @@ public class PositionReader {
 		
 	}
 	private void getFrontPositions(){
-		frontQ = new PriorityQueue<Position>();
+		frontQ = new ArrayDeque();
 		RowLoop : for(Row row: frontSheet){
 			for(int column = 0; column < 5; column++){
 				Cell cell = row.getCell(column);
@@ -99,7 +100,7 @@ public class PositionReader {
 	}
 	
 	private void getDrivePositions(){
-		frontQ = new PriorityQueue<Position>();
+		frontQ = new ArrayDeque();
 		RowLoop:
 		for(Row row: driveSheet){
 			for(int column = 0; column < 5; column++){
@@ -143,14 +144,14 @@ public class PositionReader {
 		}}
 	}
 	
-	public PriorityQueue getFrontQ(){
+	public ArrayDeque<Position> getFrontQ(){
 		if (frontQ == null){
 			getFrontPositions();
 		}
 		return frontQ;
 	}
 	
-	public PriorityQueue getDriveQ(){
+	public ArrayDeque<Position> getDriveQ(){
 		if (driveQ == null){
 			getDrivePositions();
 		}
