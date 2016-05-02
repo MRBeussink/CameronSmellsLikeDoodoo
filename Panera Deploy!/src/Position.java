@@ -62,7 +62,7 @@ public class Position implements Comparable<Position> {
     }
 
     public boolean assignEmployee(Employee employee){
-        if (employee == null && this.employee != null){
+        if (employee != null && this.employee == null){
             this.employee = employee;
             return true;
         }
@@ -108,7 +108,7 @@ public class Position implements Comparable<Position> {
     }
 
     /** Compares two positions based on the order they should be filled in
-     *  i.e any "special cases" to be made outside of the main mathcing algorithm
+     *  i.e any "special cases" to be made outside of the main matching algorithm
      *  have a lower orderOf, however, that should return that they are of greater
      *  import to match first
      *
@@ -118,13 +118,13 @@ public class Position implements Comparable<Position> {
     public int compareTo(Position aPosition){
         int result;
         if(this.getOrderOfImport() < aPosition.getOrderOfImport())
-            result = 1;
+            result = -1;
 
         else if (this.getOrderOfImport() == aPosition.getOrderOfImport())
             result = 0;
 
         else
-            result = -1;
+            result = 1;
 
         return result;
     }

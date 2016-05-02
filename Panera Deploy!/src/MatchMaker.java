@@ -58,9 +58,9 @@ public class MatchMaker {
         //this loop begins at a opening time of the store and increments every fifteen minutes until the store closes
         //or no more employees with
         for(Time currentTime = new Time(OPENING_TIME); currentTime.isBefore(CLOSING_TIME) ||
-                !employeeQ.isEmpty(); currentTime.addTime(15)){
+                employeeQ.isEmpty(); currentTime.addTime(15)){
 
-        	/*
+/*
             //check if it is the start of a new shift
             if(currentTime.equals(LUNCH_SHIFT) || currentTime.equals(DINNER_SHIFT)) {
                 //empty out temp list of positions
@@ -80,21 +80,14 @@ public class MatchMaker {
                         System.out.println("Flushing unassigned dinner positions");
                 }
             }
-            */
+*/
 
         	if(Driver.test)
         		System.out.println(currentTime);
             //move any employees just now coming in to the list of employees needing a position
-        	System.out.println("CurrentTime");
-        	
             while(employeeQ.peek().getStartTime().equals(currentTime)) {
-            	Employee x = employeeQ.peek();
-        	System.out.println(x.getName() + x.getStartTime() + x.getEndTime());
-            	
                 unassignedEmployees.add(employeeQ.remove());
-                
                 temp.add(unassignedPositions.remove());
-               
             }
 
             //where the magic happens
@@ -161,16 +154,21 @@ public class MatchMaker {
                             }
                             //if only one employee
                             if (count == 1) {
-                                if(Driver.test)
+                                if(Driver.test) {
                                     System.out.println("FOUND MATCH for Employee: " + unassignedEmployees.get(e).getName());
-                                temp.get(i).assignEmployee(unassignedEmployees.get(e));     //assign employee at e
-                                assignedPositions.add(temp.get(i));                         //move position to list of assignedPositions
+                                    System.out.println("POSITION: " + temp.get(i).getSkill());
+                                }
+                                temp.get(i).assignEmployee(unassignedEmployees.remove(e));     //assign employee at e
+                                assignedPositions.add(temp.remove(i));                         //move position to list of assignedPositions
+                                continue;
                             }
                         }
                     }
 
                     //third assign the next employee in the list to the first position then can fill
                     //TODO:want to include TRYING TO MAKE THE BEST MATCH then this is where it would be
+                    if(Driver.test)
+                        System.out.println("Starting Step 3");
                     for(int i = 0; i < unassignedEmployees.size(); i++){
                         if(skills.checkSkill(unassignedEmployees.get(0).getName(), temp.get(i).getSkill())){
                             if(Driver.test)
