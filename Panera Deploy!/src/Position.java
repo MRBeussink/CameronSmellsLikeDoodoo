@@ -128,8 +128,9 @@ public class Position implements Comparable<Position> {
 
         return result;
     }
-
+/*
     public String toString(){
         return "POSITION " + getSkill() + " - EMPLOYEE: " + this.employee.getName() + " ~~~";
     }
+*/
 }
