@@ -99,7 +99,7 @@ public class MatchMaker {
                     if(skills.getNumberOfSkills(unassignedEmployees.get(i).getName()) == 1){
                     	System.out.println("found an employee with only one skill");
                         //search temp list of positions
-                        for(int j = 0; j > temp.size(); j++){
+                        for(int j = 0; j < temp.size(); j++){
                             //if there is a position that matches the current employee's skill
                             if (skills.checkSkill(unassignedEmployees.get(i).getName(), temp.get(j).getSkill())){
                                 if(Driver.test)
