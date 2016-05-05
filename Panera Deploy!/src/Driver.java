@@ -10,7 +10,7 @@ import java.util.ArrayDeque;
 public class Driver {
 
     public static boolean test = true;
-
+    private static String file;
     public static void main(String[] args){
         //get schedule
 
@@ -57,7 +57,7 @@ public class Driver {
                     ArrayList<Position> assignedDrive = matcher.driveMatch(employeeSchedule.getSchedule(1, true),true);
                
                     ExcelWriter exwrite = new ExcelWriter();
-                    exwrite.writeFDoc(assignedFront);
+                    exwrite.writeFDoc(assignedFront, file);
                     exwrite.writeDDoc(assignedDrive);
                 
                     if(test)

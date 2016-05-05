@@ -5,21 +5,23 @@ import java.util.ArrayList;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 	
 public class ExcelWriter {
 	
 	private int x = 0;
-	GUIDriver gd = new GUIDriver();
+	
 	
 	public ExcelWriter(){
 		
 	}
 	
-	public void writeFDoc(ArrayList<Position> positions) throws FileNotFoundException{
+	public void writeFDoc(ArrayList<Position> positions, String day) throws FileNotFoundException{
 		try {
 			if(Driver.test)
 				System.out.println("Opeening input stream");
-			FileInputStream fsIP = new FileInputStream(gd.getDay());
+			FileInputStream fsIP = new FileInputStream(new File(day));
 			try {
 				if(Driver.test)
 					System.out.println("Creating new workbook");

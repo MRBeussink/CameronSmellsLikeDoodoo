@@ -36,7 +36,7 @@ public class ExcelReader {
 	
 	//Constructor 
 	public ExcelReader() throws IOException{
-		fis = new FileInputStream(gd.getFile());
+		fis = new FileInputStream(new File(gd.getFile()));
 		wb = new XSSFWorkbook(fis);
 		sheet = wb.getSheetAt(0);
 	}

@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.JComboBox;
 
 public class GUIDriver {
 	/*test to check for potential issues
@@ -29,8 +30,10 @@ public class GUIDriver {
 	//Allows for the day of week to be selected 
 	private String day;
 	
+	private String[] files = {"trial2.xlsx"};
+	
 	//File which you want to use for the Schedule
-	private File file;
+	private String file;
 	
 	/* Integer Pertaining to Day of Week
 	 * 1 - Wednesday
@@ -53,7 +56,7 @@ public class GUIDriver {
 	}
 	
 	//returns the file 
-	public File getFile(){
+	public String getFile(){
 		return file;
 	}
 	
@@ -132,7 +135,7 @@ public class GUIDriver {
 		                    ArrayList<Position> assignedDrive = matcher.driveMatch(employeeSchedule.getSchedule(columnDay, true),true);
 		               
 		                    ExcelWriter exwrite = new ExcelWriter();
-		                    exwrite.writeFDoc(assignedFront);
+		                    exwrite.writeFDoc(assignedFront, file);
 		                    exwrite.writeDDoc(assignedDrive);
 		                
 		                    if(test)
@@ -198,7 +201,7 @@ public class GUIDriver {
 		                    ArrayList<Position> assignedDrive = matcher.driveMatch(employeeSchedule.getSchedule(columnDay, true),true);
 		               
 		                    ExcelWriter exwrite = new ExcelWriter();
-		                    exwrite.writeFDoc(assignedFront);
+		                    exwrite.writeFDoc(assignedFront, file);
 		                    exwrite.writeDDoc(assignedDrive);
 		                
 		                    if(test)
@@ -264,7 +267,7 @@ public class GUIDriver {
 		                    ArrayList<Position> assignedDrive = matcher.driveMatch(employeeSchedule.getSchedule(columnDay, true),true);
 		               
 		                    ExcelWriter exwrite = new ExcelWriter();
-		                    exwrite.writeFDoc(assignedFront);
+		                    exwrite.writeFDoc(assignedFront, file);
 		                    exwrite.writeDDoc(assignedDrive);
 		                
 		                    if(test)
@@ -316,7 +319,7 @@ public class GUIDriver {
 		                    ArrayDeque<Position> frontPositionsQueue = positionReader.getFrontQ();
 		                    if(test)
 		                    	System.out.println("Trying to get Drive Thru Positions...");
-		                    ArrayDeque<Position> drivePositionsQueue = positionReader.getDriveQ();
+		                   // ArrayDeque<Position> drivePositionsQueue = positionReader.getDriveQ();
 
 		                    /* MAGIC! */
 		                    
@@ -326,16 +329,16 @@ public class GUIDriver {
 		                        for(int i = 0; i < assignedFront.size(); i++)
 		                            System.out.println(assignedFront.get(i));
 		                    
-		                    MatchMaker driveMatcher = new MatchMaker(skillMap, drivePositionsQueue);
-		                    ArrayList<Position> assignedDrive = matcher.driveMatch(employeeSchedule.getSchedule(columnDay, true),true);
+		                   // MatchMaker driveMatcher = new MatchMaker(skillMap, drivePositionsQueue);
+		                   // ArrayList<Position> assignedDrive = matcher.driveMatch(employeeSchedule.getSchedule(columnDay, true),true);
 		               
 		                    ExcelWriter exwrite = new ExcelWriter();
-		                    exwrite.writeFDoc(assignedFront);
-		                    exwrite.writeDDoc(assignedDrive);
+		                    exwrite.writeFDoc(assignedFront, day);
+		                    //exwrite.writeDDoc(assignedDrive);
 		                
-		                    if(test)
-		                        for(int i = 0; i < assignedDrive.size(); i++)
-		                            System.out.println(assignedDrive.get(i));
+		                   // if(test)
+		                      //  for(int i = 0; i < assignedDrive.size(); i++)
+		                           // System.out.println(assignedDrive.get(i));
 		                }
 		                catch(IOException e){
 		                    System.out.println("ERROR: Unable to load Positions file.");
@@ -396,7 +399,7 @@ public class GUIDriver {
 		                    ArrayList<Position> assignedDrive = matcher.driveMatch(employeeSchedule.getSchedule(columnDay, true),true);
 		               
 		                    ExcelWriter exwrite = new ExcelWriter();
-		                    exwrite.writeFDoc(assignedFront);
+		                    exwrite.writeFDoc(assignedFront, file);
 		                    exwrite.writeDDoc(assignedDrive);
 		                
 		                    if(test)
@@ -462,7 +465,7 @@ public class GUIDriver {
 		                    ArrayList<Position> assignedDrive = matcher.driveMatch(employeeSchedule.getSchedule(columnDay, true),true);
 		               
 		                    ExcelWriter exwrite = new ExcelWriter();
-		                    exwrite.writeFDoc(assignedFront);
+		                    exwrite.writeFDoc(assignedFront, file);
 		                    exwrite.writeDDoc(assignedDrive);
 		                
 		                    if(test)
@@ -528,7 +531,7 @@ public class GUIDriver {
 		                    ArrayList<Position> assignedDrive = matcher.driveMatch(employeeSchedule.getSchedule(columnDay, true),true);
 		               
 		                    ExcelWriter exwrite = new ExcelWriter();
-		                    exwrite.writeFDoc(assignedFront);
+		                    exwrite.writeFDoc(assignedFront, file);
 		                    exwrite.writeDDoc(assignedDrive);
 		                
 		                    if(test)
@@ -561,21 +564,19 @@ public class GUIDriver {
 		lblStartBySelecting.setBounds(154, 60, 573, 16);
 		frame.getContentPane().add(lblStartBySelecting);
 		
-		//This button allows you to select a file containing a schedule which you want to use to generate the deployment
-		JButton btnSchedule = new JButton("Schedule");
-		btnSchedule.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				chooser = new JFileChooser();
-				chooser.setBounds(-36, -55, 704, 397);
-				frame.getContentPane().add(chooser);
-				chooser.showOpenDialog(frame);
-				file = chooser.getSelectedFile();
-				if(Driver.test)
-					System.out.print(file);
-			}
+		JComboBox comboBox = new JComboBox(files);
+		comboBox.setBounds(349, 120, 145, 22);
+		frame.getContentPane().add(comboBox);
+		comboBox.setSelectedIndex(0);
+		file = (String) comboBox.getSelectedItem();
+		comboBox.addActionListener (new ActionListener () {
+		    public void actionPerformed(ActionEvent e) {
+		      	file = (String) comboBox.getSelectedItem();   
+		  }
 		});
-		btnSchedule.setBounds(370, 97, 140, 68);
-		frame.getContentPane().add(btnSchedule);
+		
+	
+		
 		
 		
 		
