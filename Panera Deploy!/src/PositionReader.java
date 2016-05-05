@@ -40,39 +40,60 @@ public class PositionReader {
 	}
 	private void getFrontPositions(){
 		frontQ = new ArrayDeque();
+		//Use RowLoop: to break from both for loops(if just used break you would only break from one loop
 		RowLoop : for(Row row: frontSheet){
 			for(int column = 0; column < 5; column++){
 				Cell cell = row.getCell(column);
 				if(cell != null){
+					//getCellType() determines whether the cell contains a String, boolean, numeric, or null value
 					int checker = cell.getCellType();
 					 System.out.println(checker);
 					 if(checker == 3)
 						 break RowLoop;
 					 
 					switch(column){
+						/* collects the skill as a string
+						 * this value will be compared to the enum of skills
+						 * to determine whom will be able to fullfil the position
+						 */
 						case 0:
 							String check= cell.getStringCellValue();
 							skill = check;
 							System.out.println(skill);
 							
 							break;
+						/* collects a boolean of whether someone is 
+						 * in drive thru or up front
+						 */
 						case 1:
 							boolean priority1 = cell.getBooleanCellValue();
 							priority = priority1;
 							System.out.println(priority);
 							
 							break;
+						/* collects the page/tab number of the excel sheet
+						 * This value will always be numeric
+						 * contains the page number the data will be inserted into
+						 */
 						case 2:
 							double page1  = cell.getNumericCellValue();
 							page = page1;
 							System.out.println(page);
 							break;
+						/*collects the column at index 3 of the excel sheet
+						 * This value should always be a numeric value
+						 * contains the insertion row of the cell
+						 */
 						case 3:
 							double row2 = cell.getNumericCellValue();
 							row1 = row2;
 							System.out.println(row1);
 							
 							break;
+						/*collects the column at index 4 of the excel sheet
+						This value should always be a numeric value
+						contains the insertion column of the cell
+						*/
 						case 4:
 							double col1 = cell.getNumericCellValue();
 							col = col1;
@@ -91,46 +112,72 @@ public class PositionReader {
 					if(Driver.test)
 						System.out.println(frontQ.peek().getSkill());
 				
-				/*
+				
 				else{
 					if(Driver.test)
 						System.out.println("Error adding Employee to QUEUE!");
-				}*/
+				}
 		}
 	}
 	
 	private void getDrivePositions(){
 		frontQ = new ArrayDeque();
+		//Use RowLoop: to break from both for loops(if just used break you would only break from one loop
 		RowLoop:
 		for(Row row: driveSheet){
 			for(int column = 0; column < 5; column++){
 				Cell cell = row.getCell(column);
 				if(cell != null){
+					//getCellType() determines whether the cell contains a String, boolean, numeric, or null value
 					int checker = cell.getCellType();
 					if (checker == 3)
 						break RowLoop;
 					switch(column){
+					/* collects the skill as a string
+					 * this value will be compared to the enum of skills
+					 * to determine whom will be able to fullfil the position
+					 */
 					case 0:
-						String skill= cell.getStringCellValue();
+						String skill1= cell.getStringCellValue();
+						skill = skill1;
 						System.out.println(skill);
 						
 						break;
+					/* collects a boolean of whether someone is 
+					 * in drive thru or up front
+					 */
 					case 1:
-						boolean priority = cell.getBooleanCellValue();
+						boolean priority1 = cell.getBooleanCellValue();
+						priority = priority1;
 						System.out.println(priority);
 						
 						break;
+					/* collects the page/tab number of the excel sheet
+					 * This value will always be numeric
+					 * contains the page number the data will be inserted into
+					 */
 					case 2:
-						double page  = cell.getNumericCellValue();
+						double page1  = cell.getNumericCellValue();
+						page = page1;
 						System.out.println(page);
 						break;
+					/*collects the column at index 3 of the excel sheet
+					 * This value should always be a numeric value
+					 * contains the insertion row of the cell
+					 */
 					case 3:
-						double row1 = cell.getNumericCellValue();
+						double row2 = cell.getNumericCellValue();
+						row1= row2;
 						System.out.println(row1);
 						
 						break;
+					/*collects the column at index 4 of the excel sheet
+					This value should always be a numeric value
+					contains the insertion column of the cell
+					*/
 					case 4:
-						double col = cell.getNumericCellValue();
+						double col1 = cell.getNumericCellValue();
+						col = col1;
 						System.out.println(col);
 						
 						break;
@@ -143,14 +190,14 @@ public class PositionReader {
 			driveQ.add(position);
 		}}
 	}
-	
+	//Checks if the Queue being called for is null and if so it will fill it otherwise will return the Queue(Up Front)
 	public ArrayDeque<Position> getFrontQ(){
 		if (frontQ == null){
 			getFrontPositions();
 		}
 		return frontQ;
 	}
-	
+	//Checks if the Queue being called for is null and if so it will fill it otherwise will return the Queue(Drive Thru)
 	public ArrayDeque<Position> getDriveQ(){
 		if (driveQ == null){
 			getDrivePositions();

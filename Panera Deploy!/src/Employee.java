@@ -122,7 +122,7 @@ public class Employee implements Comparable<Employee>{
      */
     @Override
     public String toString(){
-        return getName();
+    	return getName() + " " +this.getStartTime() + "-" + this.getEndTime();
     }
 
     public int compareTo(Employee anEmployee){

@@ -29,7 +29,7 @@ public class MatchMaker {
         this.unassignedPositions = newPositionQueue;
     }
   
-    public ArrayList<Position> match(PriorityQueue<Employee> employeeQ, boolean driveThru){
+    public ArrayList<Position> frontMatch(PriorityQueue<Employee> employeeQ, boolean driveThru){
 
         ArrayList<Position> assignedPositions = new ArrayList(employeeQ.size());    //holds the final list of Positions
         ArrayList<Position> temp = new ArrayList();                                 //holds a temporary list of positions to pick from first
@@ -242,5 +242,10 @@ public class MatchMaker {
             System.out.println("Finished matching.");
         }
         return assignedPositions;
+    }
+    public ArrayList<Position> driveMatch(PriorityQueue<Employee> employeeQ, boolean driveThru){
+    	ArrayList<Position> assignedPositions = new ArrayList(employeeQ.size());
+    	
+    	return assignedPositions;
     }
 }

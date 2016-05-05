@@ -24,7 +24,7 @@ public class SkillReader {
 	
 	public EmployeeSkillMap makeEmployeeSkillMap(){
 		 String name = "";
-		 
+		
 		for (Row row : sheet){
 			for (int column = 0; true; column++){
 				Cell cell = row.getCell(column);

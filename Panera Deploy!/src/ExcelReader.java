@@ -9,31 +9,55 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelReader {
-
+	//String to create the employee name
 	private String name = null;
+	
+	//String to create the Start Time
 	private String in = null;
+	
+	//String to create the End Time
 	private String out = null;
+	
+	//Creates the file in which the document will be read from
 	private FileInputStream fis;
+	
+	//creates the workbook 
 	private XSSFWorkbook wb;
+	
+	//Determines the sheet (tab) in which to read the document
 	private XSSFSheet sheet;
+	
+	//Determines if an employee is in drive thru for the day or in the front
 	private boolean drive = false;
 	
+	//Creates a GUIDriver which allows you to get the file of the schedule 
+	private GUIDriver gd = new GUIDriver();
+	
+	
+	//Constructor 
 	public ExcelReader() throws IOException{
-		fis = new FileInputStream(new File("trial2.xlsx"));
+		fis = new FileInputStream(gd.getFile());
 		wb = new XSSFWorkbook(fis);
 		sheet = wb.getSheetAt(0);
 	}
 	
+	
+	//This reads the excel document and inserts the employee into specific days of the week and in order according to their StartTime
 	public void getSchedule(Schedule s){
+		//Goes through the rows of the Sheet until there is nothing but null rows
 		for (Row row :sheet){
+			//Goes through the columns starting with index 0 and ending with index 7
 			for(int column = 0; column <8; column++){
 				Cell cell = row.getCell(column);
+				
 				//get the cell value if found to be not null
 				if(cell != null){
 					int checker = cell.getCellType();
 					System.out.println(checker);
 					String check = cell.getStringCellValue();
+				//If column == 0 which is index 0 of the excel sheet it collects the name of the employee
 				if(column == 0){
+					
 					//Assigns a name value for the entire week of times
 					for (int test = 0; test < check.length();test++){
 						char check2 =check.charAt(test);
@@ -52,6 +76,7 @@ public class ExcelReader {
 						}
 					}
 				}
+				//If the column is anything other than index 0 then this will run
 				else{
 					in = "";
 					out = "";
