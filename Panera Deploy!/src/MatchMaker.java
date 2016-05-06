@@ -244,8 +244,51 @@ public class MatchMaker {
         return assignedPositions;
     }
     public ArrayList<Position> driveMatch(PriorityQueue<Employee> employeeQ, boolean driveThru){
-    	ArrayList<Position> assignedPositions = new ArrayList(employeeQ.size());
-    	
-    	return assignedPositions;
-    }
+    	if(employeeQ == null)
+    		System.out.println("No Employee's Found");
+    	ArrayList<Position> assignedPositions = new ArrayList(employeeQ.size());    //holds the final list of Positions
+        ArrayList<Position> temp = new ArrayList();                                 //holds a temporary list of positions to pick from first
+        ArrayDeque<Position> dBreakfast = new ArrayDeque();
+        ArrayDeque<Position> dLunch = new ArrayDeque();
+        ArrayDeque<Position> dDinner = new ArrayDeque();
+        ArrayList<Employee> unassignedEmployees = new ArrayList();					 //holds a temp list of unassigned employees
+        PriorityQueue tempQ = employeeQ;
+        
+        for(int i = 1; i <= unassignedPositions.size(); i++){
+       	 if(i <= 5){
+       		 dBreakfast.add(unassignedPositions.remove());
+       	 }else if(i > 5 && i <= 11){
+       		 dLunch.add(unassignedPositions.remove());
+       	 }else if(i > 11 && i <= 17){
+       		 dDinner.add(unassignedPositions.remove());
+       	 }
+        }	 
+        
+        
+        for(Time currentTime = new Time(OPENING_TIME); currentTime.isBefore(CLOSING_TIME) ||
+                employeeQ.isEmpty(); currentTime.addTime(15)){
+
+       	 if(currentTime.compareTo(LUNCH_SHIFT) == -1){
+       		 while(employeeQ.peek().getStartTime().equals(currentTime)) {
+                    unassignedEmployees.add(employeeQ.remove());
+                    if(!dBreakfast.isEmpty())
+                        temp.add(dBreakfast.remove());
+                }
+       		 for(int i = 0; i < temp.size(); i++){
+       				 temp.get(i).assignEmployee(unassignedEmployees.remove(0));
+       				 assignedPositions.add(temp.remove(i));
+       		 }
+       	 }
+       	 if((currentTime.compareTo(LUNCH_SHIFT) == 0 || currentTime.compareTo(LUNCH_SHIFT) == 1) && currentTime.compareTo(DINNER_SHIFT) == -1){
+       		 if(currentTime.compareTo(LUNCH_SHIFT) == 0){
+       			 employeeQ = tempQ;
+       		 }
+       	 }
+       	 if(currentTime.compareTo(DINNER_SHIFT) == 0 || currentTime.compareTo(DINNER_SHIFT) == 1){
+       		 
+       	 }
+        }
+   	
+   return assignedPositions;
+   }
 }
