@@ -247,22 +247,37 @@ public class MatchMaker {
     	if(employeeQ == null)
     		System.out.println("No Employee's Found");
     	ArrayList<Position> assignedPositions = new ArrayList(employeeQ.size());    //holds the final list of Positions
-        ArrayList<Position> temp = new ArrayList();                                 //holds a temporary list of positions to pick from first
-        ArrayDeque<Position> dBreakfast = new ArrayDeque();
-        ArrayDeque<Position> dLunch = new ArrayDeque();
-        ArrayDeque<Position> dDinner = new ArrayDeque();
+        ArrayList<Position> dBreakfast = new ArrayList();
+        ArrayList<Position> dLunch = new ArrayList();
+        ArrayList<Position> dDinner = new ArrayList();
+        PriorityQueue<Employee> breakfastE = new PriorityQueue();
+        PriorityQueue<Employee> lunchE = new PriorityQueue();
+        PriorityQueue<Employee> supperE = new PriorityQueue();
         ArrayList<Employee> unassignedEmployees = new ArrayList();					 //holds a temp list of unassigned employees
         PriorityQueue tempQ = employeeQ;
         
         for(int i = 1; i <= unassignedPositions.size(); i++){
-       	 if(i <= 5){
+       	 if(i < 5){
        		 dBreakfast.add(unassignedPositions.remove());
        	 }else if(i > 5 && i <= 11){
        		 dLunch.add(unassignedPositions.remove());
        	 }else if(i > 11 && i <= 17){
        		 dDinner.add(unassignedPositions.remove());
        	 }
-        }	 
+        }	
+        for(int i = 1; i <= employeeQ.size(); i++){
+        	if (employeeQ.peek().getStartTime().compareTo(LUNCH_SHIFT) == -1){
+        		breakfastE.add(employeeQ.peek());
+        		
+        	}
+        	if (employeeQ.peek().getStartTime().compareTo(DINNER_SHIFT) == -1 && employeeQ.peek().getEndTime().compareTo(LUNCH_SHIFT) == 1){
+        		lunchE.add(employeeQ.peek());
+        	}
+        	if (employeeQ.peek().getStartTime().compareTo(DINNER_SHIFT) == 0 || employeeQ.peek().getStartTime().compareTo(DINNER_SHIFT) == 1){
+        		supperE.add(employeeQ.peek());
+        	}
+        	employeeQ.remove();
+        }
         
         
         for(Time currentTime = new Time(OPENING_TIME); currentTime.isBefore(CLOSING_TIME) ||
@@ -270,19 +285,45 @@ public class MatchMaker {
 
        	 if(currentTime.compareTo(LUNCH_SHIFT) == -1){
        		 while(employeeQ.peek().getStartTime().equals(currentTime)) {
-                    unassignedEmployees.add(employeeQ.remove());
-                    if(!dBreakfast.isEmpty())
-                        temp.add(dBreakfast.remove());
+                    unassignedEmployees.add(breakfastE.remove());
                 }
-       		 for(int i = 0; i < temp.size(); i++){
-       				 temp.get(i).assignEmployee(unassignedEmployees.remove(0));
-       				 assignedPositions.add(temp.remove(i));
+       		 for(int i = 0; i < dBreakfast.size(); i++){
+       				 dBreakfast.get(i).assignEmployee(unassignedEmployees.remove(0));
+       				 assignedPositions.add(dBreakfast.remove(i));
        		 }
        	 }
        	 if((currentTime.compareTo(LUNCH_SHIFT) == 0 || currentTime.compareTo(LUNCH_SHIFT) == 1) && currentTime.compareTo(DINNER_SHIFT) == -1){
-       		 if(currentTime.compareTo(LUNCH_SHIFT) == 0){
-       			 employeeQ = tempQ;
-       		 }
+       		 while(lunchE.peek().getStartTime().equals(currentTime)) {
+                 unassignedEmployees.add(lunchE.remove());
+             }
+       		 while(!unassignedEmployees.isEmpty()){
+       			 int count = 1;
+            	 for (int i = 0; i < dLunch.size(); i++){
+            		 if(unassignedEmployees.get(0).equals(dLunch.get(i).getSkill())){
+            			 dLunch.get(i).assignEmployee(unassignedEmployees.get(0));
+            			 assignedPositions.add(dLunch.remove(i));
+            			 break;
+            		 }
+            		count++;
+            	 }
+            	 if(count == dLunch.size()){
+            		 Employee tempE;
+            		 for(int i = 0; i < assignedPositions.size(); i++){
+            			 if(unassignedEmployees.get(0).equals(assignedPositions.get(i).getSkill())){
+            				 tempE = assignedPositions.get(i).getEmployee();
+            				 for(int x = 0; x < dLunch.size(); x++){
+            					 if (tempE.equals(dLunch.get(x).getSkill())){
+            						 dLunch.get(x).assignEmployee(tempE);
+            						 assignedPositions.add(dLunch.remove(x));
+            						 assignedPositions.get(i).changeEmployee(unassignedEmployees.get(0));
+            					 }
+            				 }
+            			 }
+            		 }
+            	 }
+             }
+            	 
+       		 
        	 }
        	 if(currentTime.compareTo(DINNER_SHIFT) == 0 || currentTime.compareTo(DINNER_SHIFT) == 1){
        		 
